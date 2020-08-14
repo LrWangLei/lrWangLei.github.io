@@ -252,7 +252,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-08-14 16:00:02 / Modified: 17:06:14" itemprop="dateCreated datePublished" datetime="2020-08-14T16:00:02+08:00">2020-08-14</time>
+              <time title="Created: 2020-08-14 16:00:02 / Modified: 17:09:41" itemprop="dateCreated datePublished" datetime="2020-08-14T16:00:02+08:00">2020-08-14</time>
             </span>
 
           
@@ -275,11 +275,14 @@
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -inform DER -subject_hash_old -in FiddlerRoot.cer</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://gitee.com/Lr283/PicMark/raw/master/img/20200814170437.png"><br>3. 保存上图执行命令后第一行输出内容，转换证书格式：,把上个命令第一行输入内容，命名为新文件名称+.0后缀格式</p>
+<p><img src="https://gitee.com/Lr283/PicMark/raw/master/img/20200814170437.png"></p>
+<ol start="3">
+<li>保存上图执行命令后第一行输出内容，转换证书格式：,把上个命令第一行输入内容，命名为新文件名称+.0后缀格式</li>
+</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -inform DER -in FiddlerRoot.cer -text &gt; e5742ab9.0</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
-<li>编辑输出的文件，把”—–BEGIN CERTIFICATE—–”到文件结束这部分移动到文件首部</li>
+<li>编辑输出的文件啊，把”—–BEGIN CERTIFICATE—–”到文件结束这部分移动到文件首部</li>
 <li>执行adb命令连接手机,获取权限，把文件夹挂载为读写模式，把文件复制到证书根目录</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">adb root</span><br><span class="line"></span><br><span class="line">adb remount</span><br><span class="line"></span><br><span class="line">adb shell mount -o rw,remount &#x2F;system</span><br><span class="line"></span><br><span class="line">adb push e5742ab9.0 &#x2F;system&#x2F;etc&#x2F;security&#x2F;cacerts</span><br><span class="line"></span><br></pre></td></tr></table></figure>
