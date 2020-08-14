@@ -20,28 +20,45 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="Idea+maven实现Jmeter java请求在搞这个之前，去网上查过很多资料。大多是用eclipse来实现的导入相应依赖的jar包。然后导出jar文件，但是现在好多都是用ide来编辑了。因为这个去按照了最新版本的ide 发现导包有各种问题。明明导入没问题，打包也没问题但是就是报错。于是想到用maven来管理依赖。· maven 不需要写main方法可以打包。· ide maven打包可以做到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用idea和maven实现JmeterJava请求">
+<meta property="og:url" content="http://yoursite.com/2020/08/14/%E4%BD%BF%E7%94%A8idea%E5%92%8Cmaven%E5%AE%9E%E7%8E%B0JmeterJava%E8%AF%B7%E6%B1%82/index.html">
 <meta property="og:site_name" content="hexo">
+<meta property="og:description" content="Idea+maven实现Jmeter java请求在搞这个之前，去网上查过很多资料。大多是用eclipse来实现的导入相应依赖的jar包。然后导出jar文件，但是现在好多都是用ide来编辑了。因为这个去按照了最新版本的ide 发现导包有各种问题。明明导入没问题，打包也没问题但是就是报错。于是想到用maven来管理依赖。· maven 不需要写main方法可以打包。· ide maven打包可以做到">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/uploads/photo/2020/ea6982e1-30ba-4b95-9137-c0285e25e343.png!large">
+<meta property="og:image" content="http://yoursite.com/uploads/photo/2020/5c1e65eb-de0c-427f-9deb-a850881aea80.png!large">
+<meta property="og:image" content="http://yoursite.com/uploads/photo/2020/0b4433cc-0dc7-4b37-9e60-0a0360da5c10.png!large">
+<meta property="og:image" content="http://yoursite.com/uploads/photo/2020/f8018527-7f31-4fdc-850b-23543c2ac466.png!large">
+<meta property="og:image" content="http://yoursite.com/uploads/photo/2020/3a11b385-9e6e-4064-88ba-de6223b88f99.png!large">
+<meta property="og:image" content="http://yoursite.com/uploads/photo/2020/943d070e-b457-4fba-b555-1df3b07caab0.png!large">
+<meta property="og:image" content="http://yoursite.com/uploads/photo/2020/9aaa60ff-9488-4962-842c-54aee2aaca2a.png!large">
+<meta property="og:image" content="http://yoursite.com/uploads/photo/2020/c42f9ac0-3412-4c49-922a-0732196d1f13.png!large">
+<meta property="og:image" content="http://yoursite.com/uploads/photo/2020/c81740a3-822a-471a-b65a-dadb3e790c10.png!large">
+<meta property="og:image" content="http://yoursite.com/uploads/photo/2020/ef2e77b8-bd95-4cf4-8cc7-05b4f66ebebc.png!large">
+<meta property="og:image" content="http://yoursite.com/uploads/photo/2020/05d989ed-b94e-4374-81b4-5b536a410d0e.png!large">
+<meta property="og:image" content="http://yoursite.com/uploads/photo/2020/19fe25bf-bb0b-4881-8b2b-d817586ca562.png!large">
+<meta property="article:published_time" content="2020-08-14T08:43:19.000Z">
+<meta property="article:modified_time" content="2020-08-14T08:43:39.879Z">
 <meta property="article:author" content="clyde">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/uploads/photo/2020/ea6982e1-30ba-4b95-9137-c0285e25e343.png!large">
 
-<link rel="canonical" href="http://yoursite.com/">
+<link rel="canonical" href="http://yoursite.com/2020/08/14/%E4%BD%BF%E7%94%A8idea%E5%92%8Cmaven%E5%AE%9E%E7%8E%B0JmeterJava%E8%AF%B7%E6%B1%82/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-cn'
   };
 </script>
 
-  <title>hexo</title>
+  <title>使用idea和maven实现JmeterJava请求 | hexo</title>
   
 
 
@@ -139,9 +156,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
@@ -157,10 +175,9 @@
       <meta itemprop="name" content="hexo">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/14/%E4%BD%BF%E7%94%A8idea%E5%92%8Cmaven%E5%AE%9E%E7%8E%B0JmeterJava%E8%AF%B7%E6%B1%82/" class="post-title-link" itemprop="url">使用idea和maven实现JmeterJava请求</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          使用idea和maven实现JmeterJava请求
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -184,7 +201,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Idea-maven实现Jmeter-java请求"><a href="#Idea-maven实现Jmeter-java请求" class="headerlink" title="Idea+maven实现Jmeter java请求"></a>Idea+maven实现Jmeter java请求</h1><p>在搞这个之前，去网上查过很多资料。大多是用eclipse来实现的导入相应依赖的jar包。然后导出jar文件，但是现在好多都是用ide来编辑了。因为这个去按照了最新版本的ide 发现导包有各种问题。明明导入没问题，打包也没问题但是就是报错。于是想到用maven来管理依赖。<br>· maven 不需要写main方法可以打包。<br>· ide maven打包可以做到一键 install clear</p>
+        <h1 id="Idea-maven实现Jmeter-java请求"><a href="#Idea-maven实现Jmeter-java请求" class="headerlink" title="Idea+maven实现Jmeter java请求"></a>Idea+maven实现Jmeter java请求</h1><p>在搞这个之前，去网上查过很多资料。大多是用eclipse来实现的导入相应依赖的jar包。然后导出jar文件，但是现在好多都是用ide来编辑了。因为这个去按照了最新版本的ide 发现导包有各种问题。明明导入没问题，打包也没问题但是就是报错。于是想到用maven来管理依赖。<br>· maven 不需要写main方法可以打包。<br>· ide maven打包可以做到一键 install clear</p>
 <h3 id="先了解java请求如何实现"><a href="#先了解java请求如何实现" class="headerlink" title="先了解java请求如何实现"></a>先了解java请求如何实现</h3><ol>
 <li>创建工程并导入lib/ext/ApacheJMeter_java.jar lib/ext/ApacheJMeter_core.jar</li>
 <li>创建一个类并实现JavaSamplerClient接口或继承AbstractJavaSamplerClient，并重写；这个类是从apacheJmeter_java包中继承</li>
@@ -209,255 +226,30 @@
 <li>在Jmeter上面的展示，选择对应的类名称即可：<br><img src="/uploads/photo/2020/05d989ed-b94e-4374-81b4-5b536a410d0e.png!large"><br><img src="/uploads/photo/2020/19fe25bf-bb0b-4881-8b2b-d817586ca562.png!large"></li>
 </ol>
 <h1 id="按照步骤走基本都会成功。maven仓库下载可能会比较慢。。这个暂时这样。因为maven公开仓库是国外友人的。有梯子的开全局代理可能会快。"><a href="#按照步骤走基本都会成功。maven仓库下载可能会比较慢。。这个暂时这样。因为maven公开仓库是国外友人的。有梯子的开全局代理可能会快。" class="headerlink" title="按照步骤走基本都会成功。maven仓库下载可能会比较慢。。这个暂时这样。因为maven公开仓库是国外友人的。有梯子的开全局代理可能会快。"></a>按照步骤走基本都会成功。maven仓库下载可能会比较慢。。这个暂时这样。因为maven公开仓库是国外友人的。有梯子的开全局代理可能会快。</h1><h1 id="出现的截图内的项目名称，包名称，不一定符合，因为取自项目多个版本的结合。还有新建的项目。do-not-care"><a href="#出现的截图内的项目名称，包名称，不一定符合，因为取自项目多个版本的结合。还有新建的项目。do-not-care" class="headerlink" title="出现的截图内的项目名称，包名称，不一定符合，因为取自项目多个版本的结合。还有新建的项目。do not care"></a>出现的截图内的项目名称，包名称，不一定符合，因为取自项目多个版本的结合。还有新建的项目。do not care</h1>
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/14/%E8%A7%A3%E5%86%B3%E5%BE%AE%E4%BF%A17-0%E4%BB%A5%E4%B8%8A%E7%89%88%E6%9C%AC%E4%B8%8D%E4%BF%A1%E4%BB%BB%E7%94%A8%E6%88%B7%E8%AF%81%E4%B9%A6%E9%97%AE%E9%A2%98/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="clyde">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/14/%E8%A7%A3%E5%86%B3%E5%BE%AE%E4%BF%A17-0%E4%BB%A5%E4%B8%8A%E7%89%88%E6%9C%AC%E4%B8%8D%E4%BF%A1%E4%BB%BB%E7%94%A8%E6%88%B7%E8%AF%81%E4%B9%A6%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">解决微信7.0以上版本不信任用户证书问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-08-14 16:00:02 / Modified: 16:08:44" itemprop="dateCreated datePublished" datetime="2020-08-14T16:00:02+08:00">2020-08-14</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="首先文章解决的是安卓手机安装证书后依然无法抓包https请求。"><a href="#首先文章解决的是安卓手机安装证书后依然无法抓包https请求。" class="headerlink" title="首先文章解决的是安卓手机安装证书后依然无法抓包https请求。"></a>首先文章解决的是安卓手机安装证书后依然无法抓包https请求。</h1><h2 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h2><ol>
-<li>安卓系统&gt;7.0，且应用不信任用户安装的证书文件</li>
-</ol>
-<h2 id="Fiddler证书安装到安卓根目录"><a href="#Fiddler证书安装到安卓根目录" class="headerlink" title="Fiddler证书安装到安卓根目录"></a>Fiddler证书安装到安卓根目录</h2><ol>
-<li>下载fiddler证书到电脑上</li>
-<li>打开命令窗口，执行以下命令，查看证书信息</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -inform DER -subject_hash_old -in FiddlerRoot.cer</span><br></pre></td></tr></table></figure>
-
-<p><img src="/uploads/photo/2020/cdf27a59-31bd-4d11-8a16-fe18bcf48e18.png!large"><br>3. 保存上图执行命令后第一行输出内容，转换证书格式：,把上个命令第一行输入内容，命名为新文件名称+.0后缀格式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -inform DER -in FiddlerRoot.cer -text &gt; e5742ab9.0</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>编辑输出的文件，把”—–BEGIN CERTIFICATE—–”到文件结束这部分移动到文件首部</li>
-<li>执行adb命令连接手机,获取权限，把文件夹挂载为读写模式，把文件复制到证书根目录</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">adb root</span><br><span class="line"></span><br><span class="line">adb remount</span><br><span class="line"></span><br><span class="line">adb shell mount -o rw,remount &#x2F;system</span><br><span class="line"></span><br><span class="line">adb push e5742ab9.0 &#x2F;system&#x2F;etc&#x2F;security&#x2F;cacerts</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="6">
-<li>以上就OK了。如果不放心可以cd 到对应目录，检查文件是否存在，文件权限是否与其他证书一致</li>
-<li>证书安装OK，其他代理选项正常配置即可</li>
-</ol>
-<h2 id="Charles证书安装到安卓根目录"><a href="#Charles证书安装到安卓根目录" class="headerlink" title="Charles证书安装到安卓根目录"></a>Charles证书安装到安卓根目录</h2><ol>
-<li>下载证书到电脑上</li>
-<li>打开命令窗口执行以下命令，查看证书信息</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -subject_hash_old -in charles-ssl-proxying-certificate.pem</span><br></pre></td></tr></table></figure>
-
-<p><img src="/uploads/photo/2020/cdf27a59-31bd-4d11-8a16-fe18bcf48e18.png!large"></p>
-<ol start="3">
-<li>保存上图执行命令后第一行输出内容，转换证书格式：,把上个命令第一行输入内容，命名为新文件名称+.0后缀格式</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv charles-ssl-proxying-certificate.pem e5742ab9.0</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>执行adb命令连接手机,获取权限，把文件夹挂载为读写模式，把文件复制到证书根目录</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">adb root</span><br><span class="line"></span><br><span class="line">adb remount</span><br><span class="line"></span><br><span class="line">adb shell mount -o rw,remount &#x2F;system</span><br><span class="line"></span><br><span class="line">adb push e5742ab9.0 &#x2F;system&#x2F;etc&#x2F;security&#x2F;cacerts</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>以上就OK了。如果不放心可以cd 到对应目录，检查文件是否存在，文件权限是否与其他证书一致</li>
-<li>证书安装OK，其他代理选项正常配置即可</li>
-</ol>
-<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><ol>
-<li>error: no devices/emulators found或者adb: unable to connect for root: no devices/emulators found</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">adb disable-verity </span><br><span class="line"></span><br><span class="line">adb reboot  # 重启</span><br><span class="line"></span><br><span class="line">然后重新按照上面的步骤操作</span><br></pre></td></tr></table></figure>
-
-<p>如果提示adb命令参数错误，找一个版本高点的adb工具包</p>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/14/%E8%A7%A3%E5%86%B3%E5%BE%AE%E4%BF%A17-0%E4%BB%A5%E4%B8%8A%E7%89%88%E6%9C%AC%E4%B8%8D%E4%BF%A1%E4%BB%BB%E7%94%A8%E6%88%B7%E8%AF%81%E4%B9%A6%E9%97%AE%E9%A2%98/" rel="prev" title="解决微信7.0以上版本不信任用户证书问题">
+      <i class="fa fa-chevron-left"></i> 解决微信7.0以上版本不信任用户证书问题
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/14/test/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="clyde">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/14/test/" class="post-title-link" itemprop="url">test</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-08-14 15:39:34" itemprop="dateCreated datePublished" datetime="2020-08-14T15:39:34+08:00">2020-08-14</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/14/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="clyde">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/14/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-08-14 15:32:19" itemprop="dateCreated datePublished" datetime="2020-08-14T15:32:19+08:00">2020-08-14</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -510,6 +302,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Idea-maven%E5%AE%9E%E7%8E%B0Jmeter-java%E8%AF%B7%E6%B1%82"><span class="nav-number">1.</span> <span class="nav-text">Idea+maven实现Jmeter java请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E4%BA%86%E8%A7%A3java%E8%AF%B7%E6%B1%82%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.0.1.</span> <span class="nav-text">先了解java请求如何实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4%E5%A6%82%E4%B8%8B"><span class="nav-number">1.0.2.</span> <span class="nav-text">步骤如下</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%89%E7%85%A7%E6%AD%A5%E9%AA%A4%E8%B5%B0%E5%9F%BA%E6%9C%AC%E9%83%BD%E4%BC%9A%E6%88%90%E5%8A%9F%E3%80%82maven%E4%BB%93%E5%BA%93%E4%B8%8B%E8%BD%BD%E5%8F%AF%E8%83%BD%E4%BC%9A%E6%AF%94%E8%BE%83%E6%85%A2%E3%80%82%E3%80%82%E8%BF%99%E4%B8%AA%E6%9A%82%E6%97%B6%E8%BF%99%E6%A0%B7%E3%80%82%E5%9B%A0%E4%B8%BAmaven%E5%85%AC%E5%BC%80%E4%BB%93%E5%BA%93%E6%98%AF%E5%9B%BD%E5%A4%96%E5%8F%8B%E4%BA%BA%E7%9A%84%E3%80%82%E6%9C%89%E6%A2%AF%E5%AD%90%E7%9A%84%E5%BC%80%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E5%8F%AF%E8%83%BD%E4%BC%9A%E5%BF%AB%E3%80%82"><span class="nav-number">2.</span> <span class="nav-text">按照步骤走基本都会成功。maven仓库下载可能会比较慢。。这个暂时这样。因为maven公开仓库是国外友人的。有梯子的开全局代理可能会快。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BA%E7%8E%B0%E7%9A%84%E6%88%AA%E5%9B%BE%E5%86%85%E7%9A%84%E9%A1%B9%E7%9B%AE%E5%90%8D%E7%A7%B0%EF%BC%8C%E5%8C%85%E5%90%8D%E7%A7%B0%EF%BC%8C%E4%B8%8D%E4%B8%80%E5%AE%9A%E7%AC%A6%E5%90%88%EF%BC%8C%E5%9B%A0%E4%B8%BA%E5%8F%96%E8%87%AA%E9%A1%B9%E7%9B%AE%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84%E7%BB%93%E5%90%88%E3%80%82%E8%BF%98%E6%9C%89%E6%96%B0%E5%BB%BA%E7%9A%84%E9%A1%B9%E7%9B%AE%E3%80%82do-not-care"><span class="nav-number">3.</span> <span class="nav-text">出现的截图内的项目名称，包名称，不一定符合，因为取自项目多个版本的结合。还有新建的项目。do not care</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
