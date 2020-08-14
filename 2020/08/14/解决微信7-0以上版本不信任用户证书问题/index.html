@@ -27,14 +27,14 @@
 <meta property="og:site_name" content="hexo">
 <meta property="og:description" content="首先文章解决的是安卓手机安装证书后依然无法抓包https请求。问题背景 安卓系统&gt;7.0，且应用不信任用户安装的证书文件  Fiddler证书安装到安卓根目录 下载fiddler证书到电脑上 打开命令窗口，执行以下命令，查看证书信息  1openssl x509 -inform DER -subject_hash_old -in FiddlerRoot.cer  3. 保存上图执行命令后第一">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/uploads/photo/2020/cdf27a59-31bd-4d11-8a16-fe18bcf48e18.png!large">
+<meta property="og:image" content="https://gitee.com/Lr283/PicMark/raw/master/img/20200814170437.png">
 <meta property="og:image" content="http://yoursite.com/uploads/photo/2020/cdf27a59-31bd-4d11-8a16-fe18bcf48e18.png!large">
 <meta property="article:published_time" content="2020-08-14T08:00:02.000Z">
-<meta property="article:modified_time" content="2020-08-14T08:08:44.088Z">
+<meta property="article:modified_time" content="2020-08-14T09:06:14.460Z">
 <meta property="article:author" content="clyde">
 <meta property="article:tag" content="测试">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/uploads/photo/2020/cdf27a59-31bd-4d11-8a16-fe18bcf48e18.png!large">
+<meta name="twitter:image" content="https://gitee.com/Lr283/PicMark/raw/master/img/20200814170437.png">
 
 <link rel="canonical" href="http://yoursite.com/2020/08/14/%E8%A7%A3%E5%86%B3%E5%BE%AE%E4%BF%A17-0%E4%BB%A5%E4%B8%8A%E7%89%88%E6%9C%AC%E4%B8%8D%E4%BF%A1%E4%BB%BB%E7%94%A8%E6%88%B7%E8%AF%81%E4%B9%A6%E9%97%AE%E9%A2%98/">
 
@@ -178,7 +178,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-08-14 16:00:02 / Modified: 16:08:44" itemprop="dateCreated datePublished" datetime="2020-08-14T16:00:02+08:00">2020-08-14</time>
+              <time title="Created: 2020-08-14 16:00:02 / Modified: 17:06:14" itemprop="dateCreated datePublished" datetime="2020-08-14T16:00:02+08:00">2020-08-14</time>
             </span>
 
           
@@ -201,7 +201,7 @@
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -inform DER -subject_hash_old -in FiddlerRoot.cer</span><br></pre></td></tr></table></figure>
 
-<p><img src="/uploads/photo/2020/cdf27a59-31bd-4d11-8a16-fe18bcf48e18.png!large"><br>3. 保存上图执行命令后第一行输出内容，转换证书格式：,把上个命令第一行输入内容，命名为新文件名称+.0后缀格式</p>
+<p><img src="https://gitee.com/Lr283/PicMark/raw/master/img/20200814170437.png"><br>3. 保存上图执行命令后第一行输出内容，转换证书格式：,把上个命令第一行输入内容，命名为新文件名称+.0后缀格式</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -inform DER -in FiddlerRoot.cer -text &gt; e5742ab9.0</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
